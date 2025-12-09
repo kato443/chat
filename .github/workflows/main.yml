@@ -1,0 +1,21 @@
+name: Simple CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML exists
+        shell: pwsh
+        run: |
+          if (Test-Path "index.html") { 
+            Write-Output "HTML file found." 
+          } else { 
+            Write-Error "index.html missing!" 
+          }
